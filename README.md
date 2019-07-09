@@ -2,7 +2,7 @@
 Data and code used for outlier simulations
 
 
-###Two topology test
+### Two topology test
 This will perform the two topology test and also correct for length. The output will be the outfile and one file called ForR (which is the GWLL) and another called ForRcorrected (which is the average SSLL).
 
 ```perl perl TwoTop.pl Supermatrix.fa ModelFile TwoTrees Outfile```
