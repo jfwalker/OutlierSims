@@ -1,0 +1,36 @@
+ 2002  pxbdsim -e 5 | pxtscale -r 1 > test.tre
+ 2097  seq-gen -m GTR -a 1 -g 4 -l 500 test.tre > test1.fa
+ 2098  seq-gen -m GTR -a 1 -g 4 -l 500 test.tre > test2.fa
+ 2099  seq-gen -m GTR -a 1 -g 4 -l 500 test.tre > test3.fa
+ 2100  seq-gen -m GTR -a 1 -g 4 -l 500 test.tre > test4.fa
+ 2101  seq-gen -m GTR -a 1 -g 4 -l 5000 test.tre > test5.fa
+ pxcat -s *.fa -p test.model -o test.super
+perl TwoTopModified.pl test.super test.model NNI_test.tre TwoTopOutput.txt
+
+
+
+Modified test.tre to have 2 outgroups and two orthologs
+
+for x in {1..5};do seq-gen -m GTR -a 1 -g 4 -l 1000 OrthoTest.tre > test$x\.fa;done
+Edit the taxa name in the fasta and for test1-test4 remove ortholog2 (_o2) for all of them, for test5 keep 1,4,5 from ortholog 2 and 2,3,6 from ortholog 1 (_o1_
+pxcat -s *.fa -p super.model -o super.fa
+perl TwoTopModified.pl super.fa super.model NNI_Ortho_test.tre OutfileTest.txt
+
+
+Misalignment
+
+for x in {1..5};do seq-gen -m GTR -a 1 -g 4 -l 1000 SimMisalignmentTree.tre > test$x\.fa;done
+pxcat -s *.fa -p super.model -o super.fa
+perl TwoTopModified.pl super.fa super.model NNI_Ortho_test.tre Outfile.txt
+
+
+Taxon Sampling
+
+
+Modeling
+
+for x in {1..4};do seq-gen -m GTR -a 1 -g 4 -l 1000 ModelingErrorTree_Normal.tre > test$x\.fa;done
+seq-gen -m GTR -a 1 -g 4 -l 1000 ModelingErrorTree_Fast.tre > test5.fa
+pxcat -s *.fa -p super.model -o super.fa
+perl TwoTopModified.pl super.fa super.model NNI_Ortho_test.tre Outfile.txt
+
